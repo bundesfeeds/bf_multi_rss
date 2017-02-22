@@ -67,7 +67,7 @@ Style/MultilineMethodCallIndentation:
 # extend self uses ruby inheritance instead of copying methods
 Style/ModuleFunction:
   Enabled: false
-  
+
 Style/Lambda:
   Enabled: false
 
@@ -82,5 +82,5 @@ AllCops:
     - Guardfile
 
 Rails:
-  Enabled: true
+  Enabled: false
   Exclude:

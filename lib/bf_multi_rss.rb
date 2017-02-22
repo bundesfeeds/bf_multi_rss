@@ -1,6 +1,7 @@
 require 'bf_multi_rss/version'
 require 'rss'
 require 'open-uri'
+require 'parallel'
 
 class RssResult
   # remove the public setter interface
@@ -20,17 +21,14 @@ module BfMultiRss
     end
   end
 
-  def self.fetch_all
-    authors = Author.all
-    @articles = []
-    contents = Parallel.map(
-      authors,
-      progress: 'Downloading feeds',
+  def self.fetch_all(uris)
+    Parallel.map(
+      uris,
       in_processes: 8
-    ) do |author|
+    ) do |uri|
       begin
-        posts = fetch_rss(author.rss)
-        RssResult.new(author, posts)
+        posts = fetch_rss(uri)
+        RssResult.new(uri, posts)
       rescue  REXML::ParseException,
               OpenURI::HTTPError,
               Errno::EHOSTUNREACH,
@@ -42,6 +40,5 @@ module BfMultiRss
         next
       end
     end
-    contents
   end
 end
