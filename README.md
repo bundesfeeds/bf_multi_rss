@@ -1,8 +1,13 @@
 # BfMultiRss
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bf_multi_rss`. To experiment with that code, run `bin/console` for an interactive prompt.
+Fetches multiple RSS Feeds in 'parallel' and gives you back the result
 
-TODO: Delete this and the text above, and describe your gem
+## TODO
+
+* learn ruby
+* Better api
+* checking parameters
+* reporting errors
 
 ## Installation
 
@@ -22,8 +27,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
-
+```
+require 'bf_multi_rss'
+BfMultiRss.fetch_all['http://','http://']
+``
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -38,4 +45,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
