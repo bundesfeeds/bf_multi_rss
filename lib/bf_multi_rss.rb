@@ -1,15 +1,14 @@
-require "bf_multi_rss/version"
+require 'bf_multi_rss/version'
 require 'rss'
 require 'open-uri'
 
-
 class RssResult
   # remove the public setter interface
-  attr_reader :posts, :author
+  attr_reader :posts, :src
 
-  def initialize(author, posts = [])
+  def initialize(src, posts = [])
     @posts = posts
-    @author = author
+    @src = src
   end
 end
 

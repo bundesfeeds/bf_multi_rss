@@ -3,6 +3,8 @@ gemspec
 
 group :development do
   gem 'guard'
-  gem 'rspec'
   gem 'guard-rspec', require: false
+  gem 'guard-rubocop'
+  gem 'rspec'
+  gem 'rubocop'
 end

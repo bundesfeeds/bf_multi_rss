@@ -1,0 +1,86 @@
+Metrics/BlockLength:
+  Enabled: false
+
+# Disable global vars
+Style/SpecialGlobalVars:
+  Enabled: false
+
+# Disable class length restriction
+Metrics/ClassLength:
+  Enabled: false
+
+# Disable module length restriction
+Metrics/ModuleLength:
+  Enabled: false
+
+# Disable method length restriction
+Metrics/MethodLength:
+  Enabled: false
+
+# Disable checking of ABC metrics (assignment, branch, condition)
+Metrics/AbcSize:
+  Enabled: false
+
+# Disable method perceived complexity (how it is hard to read a method)
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+# Disable cyclomatic complexity which is a number of paths through a method
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+# Block nesting is 5
+Metrics/BlockNesting:
+  Max: 5
+
+# Set max line length to 120
+Metrics/LineLength:
+  Max: 120
+
+Style/Documentation:
+  Enabled: false
+
+# Trailing comma helps not to forget to put it
+# if you want to add new value below
+Style/TrailingCommaInLiteral:
+  Enabled: false
+
+# It is totally ok to use block chain by my preference
+# It promotes functional programming style
+Style/MultilineBlockChain:
+  Enabled: false
+
+# Empty lines are enabled to simplify vim paragraph selection
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Style/EmptyLinesAroundMethodBody:
+  Enabled: false
+
+# Disable multiline method indentation, not comfortable with it
+Style/MultilineMethodCallIndentation:
+  Enabled: false
+
+# extend self uses ruby inheritance instead of copying methods
+Style/ModuleFunction:
+  Enabled: false
+  
+Style/Lambda:
+  Enabled: false
+
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - db/**/*
+    - bin/**
+    - config/**/**
+    - spec/dummy/bin/**
+    - spec/dummy/db/**
+    - Guardfile
+
+Rails:
+  Enabled: true
+  Exclude:
