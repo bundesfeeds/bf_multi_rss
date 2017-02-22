@@ -7,11 +7,11 @@ RSpec.describe BfMultiRss do
     expect(BfMultiRss::VERSION).not_to be nil
   end
 
-  it 'fetches spiegel' do
+  it 'fetche_rss wp' do
     BfMultiRss.fetch_rss(wp)
   end
 
-  it 'fetches spiegel' do
+  it 'fetches_all wp' do
     BfMultiRss.fetch_all([wp])
   end
 
