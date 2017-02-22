@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
-
-# Specify your gem's dependencies in bf_multi_rss.gemspec
 gemspec
+
+group :development do
+  gem 'guard'
+  gem 'rspec'
+  gem 'guard-rspec', require: false
+end

@@ -2,6 +2,7 @@ require "bf_multi_rss/version"
 require 'rss'
 require 'open-uri'
 
+
 class RssResult
   # remove the public setter interface
   attr_reader :posts, :author
