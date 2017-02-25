@@ -29,7 +29,8 @@ Or install it yourself as:
 
 ```
 require 'bf_multi_rss'
-BfMultiRss.fetch_all['http://','http://']
+bf = BfMultiRss.new(10)
+bf.fetch_all['http://','http://']
 ``
 ## Development
 

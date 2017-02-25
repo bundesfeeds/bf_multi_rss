@@ -1,4 +1,3 @@
-require 'bf_multi_rss/version'
 require 'rss'
 require 'http'
 require 'parallel'
