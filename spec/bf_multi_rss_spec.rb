@@ -7,20 +7,28 @@ RSpec.describe BfMultiRss do
   it 'has a version number' do
     expect(BfMultiRss::VERSION).not_to be nil
   end
+
+  describe 'constructor' do
+    it 'stores the concurrency' do
+      bf = BfMultiRss::Fetcher.new(10)
+      expect(bf.concurrency).to eq 10
+    end
+  end
+
   describe 'ok case' do
     it 'fetche_rss wp' do
-      BfMultiRss.fetch_rss(wp)
+      BfMultiRss::Fetcher.fetch_rss(wp)
     end
     it 'fetche_rss wp has tems' do
-      expect(BfMultiRss.fetch_rss(wp).length).to eq 10
+      expect(BfMultiRss::Fetcher.fetch_rss(wp).length).to eq 10
     end
     it 'fetches_all wp' do
-      BfMultiRss.fetch_all([wp])
+      BfMultiRss::Fetcher.fetch_all([wp])
     end
   end
   describe 'errors' do
     it '500' do
-      expect { BfMultiRss.fetch_all([http500]) }.to raise_error(RuntimeError)
+      expect { BfMultiRss::Fetcher.fetch_all([http500]) }.to raise_error(RuntimeError)
     end
   end
 end
