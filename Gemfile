@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 gemspec
 
+gem 'http'
 gem 'parallel'
 
 group :development do
@@ -9,4 +10,5 @@ group :development do
   gem 'guard-rubocop'
   gem 'rspec'
   gem 'rubocop'
+  gem 'webmock'
 end

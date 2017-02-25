@@ -1,6 +1,6 @@
 require 'bf_multi_rss/version'
 require 'rss'
-require 'open-uri'
+require 'http'
 require 'parallel'
 
 class RssResult
@@ -15,10 +15,25 @@ end
 
 module BfMultiRss
   def self.fetch_rss(uri)
-    open(uri) do |rss|
-      feed = RSS::Parser.parse(rss, false)
-      return feed.items
+    response = HTTP.get(uri)
+
+    if response.status == 500
+      err = 'Http500'
+      raise err
     end
+
+    if response.status == 404
+      err = 'Http404'
+      raise err
+    end
+
+    if response.status == 301
+      err = 'Http301'
+      raise err
+    end
+
+    rss = RSS::Parser.parse(response.to_s, false)
+    rss.items
   end
 
   def self.fetch_all(uris)
