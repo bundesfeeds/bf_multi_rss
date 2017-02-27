@@ -28,7 +28,7 @@ RSpec.describe BfMultiRss do
   end
   describe 'errors' do
     it '500' do
-      expect { BfMultiRss::Fetcher.fetch_all([http500]) }.to raise_error(RuntimeError)
+      expect { BfMultiRss::Fetcher.fetch_all([http500]) }.not_to raise_error(RuntimeError)
     end
   end
 end

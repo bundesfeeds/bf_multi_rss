@@ -13,6 +13,9 @@ class RssResult
 end
 
 module BfMultiRss
+  class NotInvertibleError < StandardError
+  end
+
   class Fetcher
     attr_reader :concurrency
     def initialize(concurrency = 4)
@@ -20,11 +23,12 @@ module BfMultiRss
     end
 
     def self.fetch_rss(uri)
+
       response = HTTP.get(uri)
 
       if response.status == 500
         err = 'Http500'
-        raise err
+        raise NotInvertibleError, err
       end
 
       if response.status == 404
@@ -56,7 +60,8 @@ module BfMultiRss
                 Net::OpenTimeout,
                 Net::ReadTimeout,
                 Errno::ECONNREFUSED,
-                Errno::ECONNRESET
+                Errno::ECONNRESET,
+                NotInvertibleError
           next
         end
       end
