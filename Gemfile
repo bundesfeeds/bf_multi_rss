@@ -3,7 +3,6 @@ gemspec
 
 gem 'http'
 gem 'parallel'
-gem 'simple-rss'
 
 group :development do
   gem 'guard'

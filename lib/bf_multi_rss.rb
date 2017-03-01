@@ -1,6 +1,5 @@
 require 'rss'
 require 'http'
-require 'simple-rss'
 require 'parallel'
 
 class RssResult
