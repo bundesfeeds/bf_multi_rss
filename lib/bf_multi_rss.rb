@@ -28,17 +28,17 @@ module BfMultiRss
       response = HTTP.get(uri)
 
       if response.status == 500
-        err = 'Http500'
+        err = 'Http500 ' + uri
         raise NotInvertibleError, err
       end
 
       if response.status == 404
-        err = 'Http404'
+        err = 'Http404 ' + uri
         raise err
       end
 
       if response.status == 301
-        err = 'Http301'
+        err = 'Http301' + uri
         raise err
       end
 
