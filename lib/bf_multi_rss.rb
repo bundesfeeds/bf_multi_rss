@@ -17,9 +17,10 @@ module BfMultiRss
   end
 
   class Fetcher
-    attr_reader :concurrency
+    attr_reader :concurrency, :errors
     def initialize(concurrency = 4)
       @concurrency = concurrency
+      @errors = []
     end
 
     def self.fetch_rss(uri)
@@ -56,6 +57,7 @@ module BfMultiRss
         rescue  REXML::ParseException,
                 OpenURI::HTTPError,
                 Errno::EHOSTUNREACH,
+                Errno::ETIMEDOUT,
                 RSS::NotWellFormedError,
                 Net::OpenTimeout,
                 Net::ReadTimeout,
