@@ -2,6 +2,8 @@ require 'bundler/setup'
 require 'bf_multi_rss'
 require 'webmock/rspec'
 wp = 'https://de.wikipedia.org/w/api.php?action=featuredfeed&feed=featured&feedformat=atom'
+error_empty = 'https://emptycontent.com'
+
 error500 = 'http://iamfivehundret.com/rss.xml'
 
 RSpec.configure do |config|
@@ -17,6 +19,9 @@ RSpec.configure do |config|
 
     stub_request(:get, wp)
     .to_return(status: 200, body: body, headers: {})
+
+    stub_request(:get, error_empty)
+    .to_return(status: 200, body: '', headers: {})
 
   end
 

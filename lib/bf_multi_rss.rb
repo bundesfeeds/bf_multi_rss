@@ -1,5 +1,6 @@
 require 'rss'
 require 'http'
+require 'simple-rss'
 require 'parallel'
 
 class RssResult
@@ -38,11 +39,15 @@ module BfMultiRss
       end
 
       if response.status == 301
-        err = 'Http301' + uri
+        err = 'Http301 ' + uri
         raise err
       end
 
       rss = RSS::Parser.parse(response.to_s, false)
+      if rss.nil?
+        err = 'ParseErr ' + uri
+        raise NotInvertibleError, err
+      end
       rss.items
     end
 
