@@ -26,7 +26,7 @@ module BfMultiRss
     def self.fetch_rss(uri)
 
       response = HTTP.get(uri)
-      self.raise_errors(response, uri)
+      raise_errors(response, uri)
       rss = RSS::Parser.parse(response.to_s, false)
       if rss.nil?
         err = 'ParseErr ' + uri

@@ -33,7 +33,7 @@ RSpec.describe BfMultiRss do
     end
 
     it '404' do
-      expect { BfMultiRss::Fetcher.fetch_all([http500]) }.not_to raise_error
+      expect { BfMultiRss::Fetcher.fetch_all([http404]) }.to raise_error
     end
 
     it '200 no content' do
