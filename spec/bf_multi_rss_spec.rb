@@ -3,7 +3,7 @@ require 'spec_helper'
 wp = 'https://de.wikipedia.org/w/api.php?action=featuredfeed&feed=featured&feedformat=atom'
 http500 = 'http://iamfivehundret.com/rss.xml'
 error_empty = 'https://emptycontent.com'
-
+http404 = 'http://fourohfour.com/rss.xml'
 RSpec.describe BfMultiRss do
   it 'has a version number' do
     expect(BfMultiRss::VERSION).not_to be nil
@@ -29,6 +29,10 @@ RSpec.describe BfMultiRss do
   end
   describe 'errors' do
     it '500' do
+      expect { BfMultiRss::Fetcher.fetch_all([http500]) }.not_to raise_error
+    end
+
+    it '404' do
       expect { BfMultiRss::Fetcher.fetch_all([http500]) }.not_to raise_error
     end
 

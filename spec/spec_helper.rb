@@ -3,9 +3,8 @@ require 'bf_multi_rss'
 require 'webmock/rspec'
 wp = 'https://de.wikipedia.org/w/api.php?action=featuredfeed&feed=featured&feedformat=atom'
 error_empty = 'https://emptycontent.com'
-
 error500 = 'http://iamfivehundret.com/rss.xml'
-
+error404 = 'http://fourohfour.com/rss.xml'
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
@@ -22,6 +21,9 @@ RSpec.configure do |config|
 
     stub_request(:get, error_empty)
     .to_return(status: 200, body: '', headers: {})
+
+    stub_request(:get, error404)
+    .to_return(status: 404, body: '', headers: {})
 
   end
 

@@ -26,28 +26,27 @@ module BfMultiRss
     def self.fetch_rss(uri)
 
       response = HTTP.get(uri)
-
-      if response.status == 500
-        err = 'Http500 ' + uri
-        raise NotInvertibleError, err
-      end
-
-      if response.status == 404
-        err = 'Http404 ' + uri
-        raise err
-      end
-
-      if response.status == 301
-        err = 'Http301 ' + uri
-        raise err
-      end
-
+      self.raise_errors(response, uri)
       rss = RSS::Parser.parse(response.to_s, false)
       if rss.nil?
         err = 'ParseErr ' + uri
         raise NotInvertibleError, err
       end
       rss.items
+    end
+
+    def self.raise_errors(response, uri)
+      case response.status
+      when 500
+        err = 'Http500 ' + uri
+        raise NotInvertibleError, err
+      when 404
+        err = 'Http404 ' + uri
+        raise err
+      when 301
+        err = 'Http301 ' + uri
+        raise NotInvertibleError, err
+      end
     end
 
     def self.fetch_all(uris)
@@ -68,6 +67,7 @@ module BfMultiRss
                 Errno::ECONNREFUSED,
                 Errno::ECONNRESET,
                 NotInvertibleError
+          puts uri
           next
         end
       end
