@@ -45,7 +45,7 @@ module BfMultiRss
         in_processes: @concurrency
       ) do |uri|
         begin
-          posts = fetch_rss(uri)
+        posts = fetch_rss(uri)
         BfMultiRss::RssResult.new(uri, posts)
         rescue  REXML::ParseException,
                 OpenURI::HTTPError,
