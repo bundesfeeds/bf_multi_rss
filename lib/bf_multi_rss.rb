@@ -1,16 +1,7 @@
 require 'rss'
 require 'http'
 require 'parallel'
-
-class RssResult
-  # remove the public setter interface
-  attr_reader :posts, :src
-
-  def initialize(src, posts = [])
-    @posts = posts
-    @src = src
-  end
-end
+require 'rss_result'
 
 module BfMultiRss
   class NotInvertibleError < StandardError
@@ -24,7 +15,6 @@ module BfMultiRss
     end
 
     def self.fetch_rss(uri)
-
       response = HTTP.get(uri)
       raise_errors(response, uri)
       rss = RSS::Parser.parse(response.to_s, false)
@@ -56,7 +46,7 @@ module BfMultiRss
       ) do |uri|
         begin
           posts = fetch_rss(uri)
-          RssResult.new(uri, posts)
+        BfMultiRss::RssResult.new(uri, posts)
         rescue  REXML::ParseException,
                 OpenURI::HTTPError,
                 Errno::EHOSTUNREACH,
