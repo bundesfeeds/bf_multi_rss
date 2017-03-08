@@ -4,7 +4,7 @@ wp = 'https://de.wikipedia.org/w/api.php?action=featuredfeed&feed=featured&feedf
 http500 = 'http://iamfivehundret.com/rss.xml'
 error_empty = 'https://emptycontent.com'
 http404 = 'http://fourohfour.com/rss.xml'
-RSpec.describe BfMultiRss do
+RSpec.describe BfMultiRss::Fetcher do
   it 'has a version number' do
     expect(BfMultiRss::VERSION).not_to be nil
   end

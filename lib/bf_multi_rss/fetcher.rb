@@ -1,7 +1,7 @@
 require 'rss'
 require 'http'
 require 'parallel'
-require 'rss_result'
+require 'bf_multi_rss/rss_result'
 
 module BfMultiRss
   class NotInvertibleError < StandardError
