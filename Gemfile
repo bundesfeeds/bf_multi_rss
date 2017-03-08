@@ -1,9 +1,6 @@
 source 'https://rubygems.org'
 gemspec
 
-gem 'http'
-gem 'parallel'
-
 group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
