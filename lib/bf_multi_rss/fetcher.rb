@@ -46,7 +46,8 @@ module BfMultiRss
     end
 
     def fetch_all(uris)
-      Parallel.map(
+      @errors = []
+      results = Parallel.map(
         uris,
         in_processes: @concurrency
       ) do |uri|
@@ -66,6 +67,13 @@ module BfMultiRss
                 NotInvertibleError => e
           BfMultiRss::RssError.new(uri, e)
         end
+      end
+      errors = results.select do |result|
+        result.is_a? BfMultiRss::RssError
+      end
+      @errors = errors
+      results.select do |result|
+        !result.is_a? BfMultiRss::RssError
       end
     end
   end

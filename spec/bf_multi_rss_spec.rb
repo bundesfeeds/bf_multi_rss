@@ -39,7 +39,6 @@ RSpec.describe BfMultiRss::Fetcher do
       expect(fetcher.errors).to be_truthy
     end
     it 'collects errors' do
-      skip
       fetcher = BfMultiRss::Fetcher.new
       fetcher.fetch_all([http500])
       expect(fetcher.errors.length).to be(1)
