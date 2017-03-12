@@ -15,10 +15,15 @@ module BfMultiRss
       @errors = []
     end
 
-    def fetch_rss(uri)
+    def fetch_uri(uri)
       response = HTTP.get(uri)
       raise_errors(response, uri)
-      rss = RSS::Parser.parse(response.to_s, false)
+      response.to_s
+    end
+
+    def fetch_rss(uri)
+      response = fetch_uri(uri)
+      rss = RSS::Parser.parse(response, false)
       if rss.nil?
         err = 'ParseErr ' + uri
         raise NotInvertibleError, err
