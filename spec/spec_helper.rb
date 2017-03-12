@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'bf_multi_rss/fetcher'
+require 'bf_multi_rss/rss_error'
 require 'webmock/rspec'
 wp = 'https://de.wikipedia.org/w/api.php?action=featuredfeed&feed=featured&feedformat=atom'
 error_empty = 'https://emptycontent.com'

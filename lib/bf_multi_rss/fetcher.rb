@@ -2,6 +2,7 @@ require 'rss'
 require 'http'
 require 'parallel'
 require 'bf_multi_rss/rss_result'
+require 'bf_multi_rss/rss_error'
 
 module BfMultiRss
   class NotInvertibleError < StandardError
@@ -14,7 +15,7 @@ module BfMultiRss
       @errors = []
     end
 
-    def self.fetch_rss(uri)
+    def fetch_rss(uri)
       response = HTTP.get(uri)
       raise_errors(response, uri)
       rss = RSS::Parser.parse(response.to_s, false)
@@ -25,21 +26,21 @@ module BfMultiRss
       rss.items
     end
 
-    def self.raise_errors(response, uri)
+    def raise_errors(response, uri)
       case response.status
       when 500
         err = 'Http500 ' + uri
         raise NotInvertibleError, err
       when 404
         err = 'Http404 ' + uri
-        raise err
+        raise NotInvertibleError, err
       when 301
         err = 'Http301 ' + uri
         raise NotInvertibleError, err
       end
     end
 
-    def self.fetch_all(uris)
+    def fetch_all(uris)
       Parallel.map(
         uris,
         in_processes: @concurrency
@@ -47,6 +48,7 @@ module BfMultiRss
         begin
           posts = fetch_rss(uri)
           BfMultiRss::RssResult.new(uri, posts)
+
         rescue  REXML::ParseException,
                 OpenURI::HTTPError,
                 Errno::EHOSTUNREACH,
@@ -56,9 +58,8 @@ module BfMultiRss
                 Net::ReadTimeout,
                 Errno::ECONNREFUSED,
                 Errno::ECONNRESET,
-                NotInvertibleError
-          puts uri
-          next
+                NotInvertibleError => e
+          BfMultiRss::RssError.new(uri, e)
         end
       end
     end

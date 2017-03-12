@@ -5,6 +5,11 @@ http500 = 'http://iamfivehundret.com/rss.xml'
 error_empty = 'https://emptycontent.com'
 http404 = 'http://fourohfour.com/rss.xml'
 RSpec.describe BfMultiRss::Fetcher do
+
+  let(:fetcher) do
+    BfMultiRss::Fetcher.new(10)
+  end
+
   it 'has a version number' do
     expect(BfMultiRss::VERSION).not_to be nil
   end
@@ -18,26 +23,39 @@ RSpec.describe BfMultiRss::Fetcher do
 
   describe 'ok case' do
     it 'fetche_rss wp' do
-      BfMultiRss::Fetcher.fetch_rss(wp)
+      fetcher.fetch_rss(wp)
     end
     it 'fetche_rss wp has tems' do
-      expect(BfMultiRss::Fetcher.fetch_rss(wp).length).to eq 10
+      expect(fetcher.fetch_rss(wp).length).to eq 10
     end
     it 'fetches_all wp' do
-      BfMultiRss::Fetcher.fetch_all([wp])
+      fetcher.fetch_all([wp])
+    end
+  end
+
+  describe '.error' do
+    it 'has a .errors property' do
+      fetcher = BfMultiRss::Fetcher.new
+      expect(fetcher.errors).to be_truthy
+    end
+    it 'collects errors' do
+      skip
+      fetcher = BfMultiRss::Fetcher.new
+      fetcher.fetch_all([http500])
+      expect(fetcher.errors.length).to be(1)
     end
   end
   describe 'errors' do
     it '500' do
-      expect { BfMultiRss::Fetcher.fetch_all([http500]) }.not_to raise_error
+      expect { fetcher.fetch_all([http500]) }.not_to raise_error
     end
 
     it '404' do
-      expect { BfMultiRss::Fetcher.fetch_all([http404]) }.to raise_error
+      expect { fetcher.fetch_all([http404]) }.not_to raise_error
     end
 
     it '200 no content' do
-      expect { BfMultiRss::Fetcher.fetch_all([error_empty]) }.not_to raise_error
+      expect { fetcher.fetch_all([error_empty]) }.not_to raise_error
     end
 
   end
