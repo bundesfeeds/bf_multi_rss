@@ -63,7 +63,8 @@ module BfMultiRss
                 Net::ReadTimeout,
                 Errno::ECONNREFUSED,
                 Errno::ECONNRESET,
-                NotInvertibleError => e
+                NotInvertibleError,
+                ArgumentError => e
           BfMultiRss::RssError.new(uri, e.to_s)
         end
       end

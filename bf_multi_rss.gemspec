@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name = 'bf_multi_rss'
-  spec.version = '0.3.6'
+  spec.version = '0.3.7'
   spec.authors = ['Sebastian Schürmann']
   spec.email = ['sebs@2xs.org']
 
