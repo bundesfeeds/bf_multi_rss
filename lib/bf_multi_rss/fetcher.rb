@@ -54,7 +54,6 @@ module BfMultiRss
         begin
           posts = fetch_rss(uri)
           BfMultiRss::RssResult.new(uri, posts)
-
         rescue  REXML::ParseException,
                 OpenURI::HTTPError,
                 Errno::EHOSTUNREACH,
@@ -65,7 +64,7 @@ module BfMultiRss
                 Errno::ECONNREFUSED,
                 Errno::ECONNRESET,
                 NotInvertibleError => e
-          BfMultiRss::RssError.new(uri, e)
+          BfMultiRss::RssError.new(uri, e.to_s)
         end
       end
       errors = results.select do |result|
