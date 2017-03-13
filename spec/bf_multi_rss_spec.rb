@@ -10,10 +10,6 @@ RSpec.describe BfMultiRss::Fetcher do
     BfMultiRss::Fetcher.new(10)
   end
 
-  it 'has a version number' do
-    expect(BfMultiRss::VERSION).not_to be nil
-  end
-
   describe 'constructor' do
     it 'stores the concurrency' do
       bf = BfMultiRss::Fetcher.new(10)
