@@ -64,7 +64,8 @@ module BfMultiRss
                 Errno::ECONNREFUSED,
                 Errno::ECONNRESET,
                 NotInvertibleError,
-                ArgumentError => e
+                ArgumentError,
+                HTTP::ConnectionError => e
           BfMultiRss::RssError.new(uri, e.to_s)
         end
       end
