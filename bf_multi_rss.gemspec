@@ -1,19 +1,18 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-
 Gem::Specification.new do |s|
-  s.name        = 'bf_multi_rss'
-  s.version     = '0.3.4'
-  s.licenses    = ['MIT']
-  s.summary     = 'Parallel rss fetching'
-  s.authors     = ['Sebastian Schürmann']
-  s.email       = 'rubycoder@example.com'
+  s.name = 'bf_multi_rss'
+  s.version = '0.3.5'
+  s.licenses = ['MIT']
+  s.summary = 'Parallel rss fetching'
+  s.authors = ['Sebastian Schürmann']
+  s.email = 'rubycoder@example.com'
 
   s.files = Dir['lib/   *.rb'] + Dir['bin/*']
   s.files += Dir['[A-Z]*'] + Dir['rspec/**/*']
-  s.files.reject! { |fn| fn.include? "CVS" }
+  s.files.reject! { |fn| fn.include? 'git' }
 
-  s.homepage    = 'https://github.com/bundesfeeds'
+  s.homepage = 'https://github.com/bundesfeeds'
   s.add_development_dependency 'bundler', '~> 1.14'
   s.add_development_dependency 'rake', '~> 10.0'
   s.add_development_dependency 'rspec', '~> 3.0'
